@@ -51,7 +51,7 @@ const MealItem = ({ item }) => {
       </ImageBackground>
       <View style={styles.remaining}>
         <Text style={styles.remainingText}>
-          Quedan {item.idMeal.substring(0, 1)}
+          Quedan {item.idMeal.substring(3, 4)}
         </Text>
       </View>
       <View style={{ position: "absolute", bottom: 5, left: 5 }}>
