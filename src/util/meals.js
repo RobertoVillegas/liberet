@@ -1,4 +1,4 @@
-const URL = "https://www.themealdb.com/api/json/v1/1";
+import { URL } from "../constants";
 
 export const getMealsByIngredient = async (meal = "Beef") => {
   const response = await fetch(`${URL}/filter.php?c=${meal}`);

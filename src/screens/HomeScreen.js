@@ -7,28 +7,14 @@ import {
   TouchableOpacity,
   StyleSheet,
   View,
-  ScrollView,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import Ionicons from "@expo/vector-icons/Ionicons";
 
 import { getMealsByIngredient, getMealCategories } from "../util/meals";
 import MealItem from "../components/MealItem";
-
-const COLORS = {
-  primary: {
-    orange: "#FCAB3F",
-    yellow: "#FDC963",
-    darkGray: "#4D4D4D",
-    white: "#FFFFFF",
-  },
-  secondary: {
-    green: "#A1D2CE",
-    red: "#F49897",
-    lightGray: "#E4E4E4",
-    beige: "#FEF2F1",
-  },
-};
+import Days from "../components/Days";
+import Chip from "../components/Chip";
+import { COLORS } from "../constants";
 
 const HomeScreen = () => {
   const [meals, setMeals] = useState([]);
@@ -76,63 +62,27 @@ const HomeScreen = () => {
       <View>
         <Button title="Alert" onPress={alert} />
       </View>
-      <Text>HOME SCREEN</Text>
-      <Text>Categories</Text>
+      <Days />
       <View
         style={{
           flexDirection: "row",
           margin: 10,
         }}
       >
-        <TouchableOpacity style={styles.chip}>
-          <View
-            style={{
-              flexDirection: "row",
-              marginHorizontal: 2,
-              justifyContent: "space-evenly",
-            }}
-          >
-            <Ionicons name="time" size={13} color={COLORS.primary.yellow} />
-            <Text style={{ paddingStart: 3, fontSize: 12 }}>
-              2:00 - 3:00 pm
-            </Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.chip}>
-          <View
-            style={{
-              flexDirection: "row",
-              marginHorizontal: 2,
-              justifyContent: "space-evenly",
-            }}
-          >
-            <Ionicons
-              name="restaurant"
-              size={12}
-              color={COLORS.primary.yellow}
-            />
-            <Text style={{ paddingStart: 3, fontSize: 12 }}>
-              Cocina industrial
-            </Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.chip}>
-          <View
-            style={{
-              flexDirection: "row",
-              marginHorizontal: 2,
-              justifyContent: "space-evenly",
-            }}
-          >
-            <Ionicons name="add" size={12} color={COLORS.primary.yellow} />
-            <Text style={{ paddingStart: 3, fontSize: 12 }}>Platillos</Text>
-          </View>
-        </TouchableOpacity>
+        <Chip icon="time" text="2:00 - 3:00 pm" size={12} />
+        <Chip
+          icon="restaurant"
+          text="Cocina industrial"
+          size={12}
+          options={categories}
+        />
+        <Chip icon="add" text="Platillos" size={12} />
       </View>
       <View
         style={{
           flexDirection: "row",
           flexWrap: "wrap",
+          marginHorizontal: 10,
         }}
       >
         {categories.map((category) => (
@@ -141,7 +91,7 @@ const HomeScreen = () => {
             style={styles.chip}
             onPress={() => setCategory(category.strCategory)}
           >
-            <Text>{category.strCategory}</Text>
+            <Text style={styles.chipText}>{category.strCategory}</Text>
           </TouchableOpacity>
         ))}
       </View>
@@ -171,6 +121,9 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     paddingHorizontal: 10,
     borderWidth: 1,
-    borderColor: "gray",
+    borderColor: COLORS.secondary.lightGray,
+  },
+  chipText: {
+    fontSize: 12,
   },
 });
